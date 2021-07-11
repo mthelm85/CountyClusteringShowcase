@@ -87,6 +87,7 @@ Now we need to write some utility functions that are going to do the dirty work 
 # ╔═╡ 6e2e3db5-52d0-4dd4-b769-a1b28db6f369
 function industry_df(state::String)
   @linq DataFrame(CSV.File(download(data_path), normalizenames=true)) |>
+	transform(St = lpad.(:St, 2, "0")) |>
     where(
 		(:Area_Type .== "County") .&
 		(:Industry .== "10 Total, all industries") .&
@@ -282,7 +283,7 @@ begin
 	end
 end
 
-# ╔═╡ e8440246-2b08-44c8-83e4-7d4553846912
+# ╔═╡ aa0a1ac1-9c4d-433f-a04c-c031fc68debf
 show_state_groups_kmeds("FL")
 
 # ╔═╡ Cell order:
@@ -307,4 +308,4 @@ show_state_groups_kmeds("FL")
 # ╟─465fb1f2-786b-4b50-9ea1-fdb5d4f7e698
 # ╟─7469f998-2211-4221-9f1f-383ed9ac3865
 # ╠═5a15b200-20ad-4204-9711-7515d1a641d9
-# ╠═e8440246-2b08-44c8-83e4-7d4553846912
+# ╠═aa0a1ac1-9c4d-433f-a04c-c031fc68debf
